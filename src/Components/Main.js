@@ -1,119 +1,157 @@
-import React, { Component, Fragment } from 'react'
-import {View, ScrollView, Text, Button, StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native'
+import React, { Component } from 'react'
+import { View, StyleSheet, TouchableHighlight, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Sound from "react-native-sound";
 
-class DrawerDashboard extends Component{
-    render(){
-        return(
-            <Fragment >
-               <View>
-                   <Text></Text>
-               </View>
-            </Fragment>
+class Drum extends Component {
+    onBassPress() {
+        const requireAudio = require('../Assets/snare.wav');
+        const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release()); });
+    }
+
+    onCymbalPress() {
+        const requireAudio = require('../Assets/cymbal.wav');
+        const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release()); });
+    }
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={{ top: '5%' }}>
+                    <View
+                        style={{ flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 100 }}>
+                        <TouchableHighlight
+                            activeOpacity={0.9}
+                            style={styles.smallDrum}>
+                            <TouchableOpacity style={styles.smallDrumOutter}
+                                onPress={this.onCymbalPress.bind(this)}
+                                activeOpacity={0.1}>
+                                <Text style={styles.smallDrumInner} > </Text>
+                            </TouchableOpacity>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            activeOpacity={0.9}
+                            style={styles.smallDrum}>
+                            <TouchableOpacity style={styles.smallDrumOutter}
+                                onPress={this.onCymbalPress.bind(this)}
+                                activeOpacity={0.1}>
+                                <Text style={styles.smallDrumInner} > </Text>
+                            </TouchableOpacity>
+                        </TouchableHighlight>
+                    </View>
+                    <View
+                        style={{ flexDirection: 'row', justifyContent: 'space-evenly', bottom: '15%' }}>
+                        <TouchableHighlight
+                            style={styles.bigDrum}
+
+                        >
+                            <TouchableOpacity style={styles.bigDrumOutter}
+                                onPress={this.onBassPress.bind(this)}
+                                activeOpacity={0.1}>
+                                <Text style={styles.bigDrumInner}></Text>
+                            </TouchableOpacity>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={styles.bigDrum}
+
+                        >
+                            <TouchableOpacity style={styles.bigDrumOutter}
+                                onPress={this.onBassPress.bind(this)}
+                                activeOpacity={0.1}>
+                                <Text style={styles.bigDrumInner}></Text>
+                            </TouchableOpacity>
+                        </TouchableHighlight>
+                    </View>
+                </View>
+            </View>
         )
     }
 }
 
-export default DrawerDashboard
-const style = StyleSheet.create({
-    text: {
-        top: 161.54,
-        left: 133.6,
-        color: "#f79237",
-        position: "absolute"
-    },
-    text2: {
-        top: 176.51,
-        left: 100,
-        color: "#f79237",
-        position: "absolute",
-        fontSize: 51,
-        fontWeight: "bold",
-        fontStyle: "italic",
-    },
-    text3: {
-        top: 234.92,
-        left: 125.13,
-        color: "#f79237",
-        position: "absolute",
-        fontSize: 14
-    },
-    ellipse: {
-        top: 356.22,
-        left: 34.79,
-        width: 90.34,
-        height: 90.45,
-        position: "absolute",
-        backgroundColor: "rgba(238,206,206,1)",
-        borderRadius: 100,
-    },
-    ellipse1: {
-        top: 376.49,
-        left: 54.76,
-        width: 50.4,
-        height: 49.91,
-        position: "absolute",
-        backgroundColor: "rgba(227,166,174,1)",
-        borderRadius: 100,
-    },
-    ellipse2: {
-        top: 356.22,
-        left: 234.38,
-        width: 90.34,
-        height: 90.45,
-        position: "absolute",
-        backgroundColor: "rgba(238,206,206,1)",
-        borderRadius: 100,
-    },
-    ellipse3: {
-        top: 376.49,
-        left: 254.35,
-        width: 50.4,
-        height: 49.91,
-        position: "absolute",
-        backgroundColor: "rgba(227,166,174,1)",
-        borderRadius: 100,
-    },
+export default Drum
 
-    ellipse4: {
-        top: 267.29,
-        left: 196.71,
-        width: 75.34,
-        height: 75.45,
-        position: "absolute",
-        backgroundColor: "#fff",
-        borderRadius: 100,
-        elevation: 10
+// class BigDrum extends Component {
+//     render() {
+//         return (
+//             <TouchableHighlight
+//                 style={styles.bigDrum}
+
+//             >
+//                 <TouchableOpacity style={styles.bigDrumOutter}
+//                     onPress={this.onButtonPress.bind(this)}
+//                     activeOpacity={0.1}>
+//                     <Text style={styles.bigDrumInner}></Text>
+//                 </TouchableOpacity>
+//             </TouchableHighlight>
+//         )
+//     }
+// }
+
+// class SmallDrum extends Component {
+//     render() {
+//         return (
+//             <TouchableHighlight
+//                 activeOpacity={0.9}
+//                 style={styles.smallDrum}>
+//                 <TouchableOpacity style={styles.smallDrumOutter}
+//                     onPress={this.onButtonPress.bind(this)}
+//                     activeOpacity={0.01}>
+//                     <Text style={styles.smallDrumInner} > </Text>
+//                 </TouchableOpacity>
+//             </TouchableHighlight>
+//         )
+//     }
+// }
+
+const styles = StyleSheet.create({
+    bigDrum: {
+        width: '75%',
+        height: 100,
+        top: 100,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    ellipse5: {
-        top: 285.01,
-        left: 214.18,
-        width: 40.4,
+    bigDrumOutter: {
+        width: 100,
+        height: 100,
+        borderRadius: 100 / 2,
+        backgroundColor: '#EECECE',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8
+    },
+    bigDrumInner: {
+        width: 50,
+        height: 50,
+        borderRadius: 100 / 2,
+        backgroundColor: '#E3A6AE',
+        position: 'absolute'
+    },
+    smallDrum: {
+        width: '25%',
+        height: 70,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    smallDrumOutter: {
+        width: 80,
+        height: 80,
+        borderRadius: 100 / 2,
+        backgroundColor: '#F7F7F7',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8
+    },
+    smallDrumInner: {
+        width: 40,
         height: 40,
-        position: "absolute",
-        backgroundColor: "rgba(183,200,203,1)",
-        borderRadius: 100,
+        borderRadius: 100 / 2,
+        backgroundColor: '#B7C8CB',
+        position: 'absolute'
     },
-ellipse6: {
-       top: 267.29,
-        left: 95.93,
-        width: 75.34,
-        height: 75.45,
-        position: "absolute",
-        backgroundColor: "#fff",
-        borderRadius: 100,
-        elevation: 10
-    },
-    ellipse7: {
-        top: 285.01,
-        left: 113.4,
-        width: 40.4,
-        height: 40,
-        position: "absolute",
-        backgroundColor: "rgba(183,200,203,1)",
-        borderRadius: 100,
-    },
-    konten : {
-        left:30,
-        top : 60
+    container: {
+        flex: 1,
+        margin: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
-})/0
+})
