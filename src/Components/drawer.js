@@ -6,7 +6,8 @@ class DrawerDashboard extends Component{
         return(
             <Fragment >
                 <View >
-                    <Text>coba drawer</Text>
+                    <Text>Login</Text> 
+                    <Text>Register</Text>
                 </View>
             </Fragment>
         )
