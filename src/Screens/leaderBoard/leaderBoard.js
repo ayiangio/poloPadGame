@@ -9,15 +9,21 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Leaderboard from 'react-native-leaderboard'
+import { connect } from 'react-redux';
+import { getScore } from '../../Publics/Redux/action/board'
+
 class boards extends Component {
   state = {
-    data: [
-        {userName: 'Joe', highScore: 52},
-        {userName: 'Jenny', highScore: 120}
-    ]
+    data: []
 }
+componentDidMount = async () => {
+  await this.props.dispatch(getScore());
+  this.setState({
+    data: this.props.score
+  });
+};
   render() {
-    let index = 1
+    console.log(this.state.data)
     return (
       <View style={style.container}>
         <View style={style.header}>
@@ -49,14 +55,20 @@ class boards extends Component {
         <View>
         <Leaderboard 
         data={this.state.data} 
-        sortBy='highScore' 
-        labelBy='userName'/>
+        sortBy='score' 
+        labelBy='fullName'/>
         </View>
       </View>
     )
   }
 }
-export default boards
+const mapStateToProps = (state) => {
+  return {
+    score: state.board.scoreList,
+   
+  };
+};
+export default connect(mapStateToProps)(boards);
 const style = StyleSheet.create({
   container: {
     backgroundColor: 'white',

@@ -10,35 +10,37 @@ class Drum extends Component {
             hasil: 0,
             combo: 5,
             score: 0,
-            pattern: [1, 2, 1, 1,4],
+            pattern: [1,2,3,2,2,3,2,3,4, 4, 4, 4, 2],
             isNow: 0,
             button: 1
         };
-        // this.onBassPress1 = this.onBassPress1.bind(this);
-        // this.onBassPress2 = this.onBassPress2.bind(this);
-        // this.onCymbalPress2 = this.onCymbalPress2.bind(this);
-        // this.onCymbalPress1 = this.onCymbalPress1.bind(this);
     }
     onBassPress1 = async () => {
-        await this.setState({
-            button: 1
-        })
-        console.log("Tombol " + this.state.button)
+        if(this.state.combo === 0){
+            alert('Congratulation')
+        }
+        console.log("Tombol " + 1)
         const requireAudio = require('../Assets/snare.wav');
+        const requireNext = require('../Assets/next.wav');
+        const next = new Sound (requireNext)
         const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release(), s.setVolume(1.0)); });
-        if (this.state.pattern[this.state.isNow] === this.state.button) {
+        if (this.state.pattern[this.state.isNow] === 1) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1
+                    combo: this.state.combo - 1,
+                    isNow: 0
                 })
+                next.play(() => next.release())
             }
             await this.setState({
                 score: this.state.score + 10,
                 isNow: this.state.isNow + 1
             })
-            
+
         }
+        
         else {
+            alert('Sorry You Lose')
             await this.setState({
                 score: 0,
                 hasil: 0,
@@ -46,28 +48,37 @@ class Drum extends Component {
                 combo: 5
             })
         }
+        await this.setState({
+            button: this.state.pattern[this.state.isNow]
+        })
         console.log("Score " + this.state.score)
         console.log("Cpmbo " + this.state.combo)
     }
     onBassPress2 = async () => {
-        await this.setState({
-            button: 4
-        })
-        console.log("Tombol " + this.state.button)
+        if(this.state.combo === 0){
+            alert('Congratulation')
+        }
+        console.log("Tombol " + 4)
         const requireAudio = require('../Assets/snare.wav');
+        const requireNext = require('../Assets/next.wav');
+        const next = new Sound (requireNext)
         const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release(), s.setVolume(1.0)); });
-        if (this.state.pattern[this.state.isNow] === this.state.button) {
+        if (this.state.pattern[this.state.isNow] === 4) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1
+                    combo: this.state.combo - 1,
+                    isNow: 0
                 })
+                next.play(() => next.release())
             }
             await this.setState({
                 score: this.state.score + 10,
                 isNow: this.state.isNow + 1
             })
+
         }
         else {
+            alert('Sorry You Lose')
             await this.setState({
                 score: 0,
                 hasil: 0,
@@ -75,27 +86,37 @@ class Drum extends Component {
                 combo: 5
             })
         }
+        await this.setState({
+            button: this.state.pattern[this.state.isNow]
+        })
         console.log("Score " + this.state.score)
+        console.log("Combo " + this.state.combo)
     }
     onCymbalPress2 = async () => {
-        await this.setState({
-            button: 2
-        })
-        console.log("Tombol " + this.state.button)
+        if(this.state.combo === 0){
+            alert('Congratulation')
+        }
+        console.log("Tombol " + 2)
         const requireAudio = require('../Assets/cymbal.wav');
+        const requireNext = require('../Assets/next.wav');
+        const next = new Sound (requireNext)
         const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release(), s.setVolume(1.0)); });
-        if (this.state.pattern[this.state.isNow] === this.state.button) {
+        if (this.state.pattern[this.state.isNow] === 2) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1
+                    combo: this.state.combo - 1,
+                    isNow: 0
                 })
+                next.play(() => next.release())
             }
             await this.setState({
                 score: this.state.score + 10,
                 isNow: this.state.isNow + 1
             })
+
         }
         else {
+            alert('Sorry You Lose')
             await this.setState({
                 score: 0,
                 hasil: 0,
@@ -103,27 +124,37 @@ class Drum extends Component {
                 combo: 5
             })
         }
+        await this.setState({
+            button: this.state.pattern[this.state.isNow]
+        })
         console.log("Score " + this.state.score)
+        console.log("Cpmbo " + this.state.combo)
     }
     onCymbalPress1 = async () => {
-        await this.setState({
-            button: 3
-        })
-        console.log("Tombol " + this.state.button)
+        if(this.state.combo === 0){
+            alert('Congratulation')
+        }
+        console.log("Tombol " + 3)
         const requireAudio = require('../Assets/cymbal.wav');
+        const requireNext = require('../Assets/next.wav');
+        const next = new Sound (requireNext)
         const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release(), s.setVolume(1.0)); });
-        if (this.state.pattern[this.state.isNow] === this.state.button) {
+        if (this.state.pattern[this.state.isNow] === 3) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1
+                    combo: this.state.combo - 1,
+                    isNow: 0
                 })
+                next.play()
             }
             await this.setState({
                 score: this.state.score + 10,
                 isNow: this.state.isNow + 1
             })
+
         }
         else {
+            alert('Sorry You Lose')
             await this.setState({
                 score: 0,
                 hasil: 0,
@@ -131,15 +162,16 @@ class Drum extends Component {
                 combo: 5
             })
         }
-        console.log("Score " + this.state.score)
-    }
-    setScore() {
-        this.setState(() => {
-            this.state.button = 1
+        await this.setState({
+            button: this.state.pattern[this.state.isNow]
         })
-        console.log("setScore " + this.state.button)
+        console.log("Score " + this.state.score)
+        console.log("Cpmbo " + this.state.combo)
     }
     render() {
+        // this.setState({
+        //     button : this.state.pattern[0]
+        // })
         return (
             <>
                 <View style={{ marginTop: -320 }}>
@@ -158,62 +190,62 @@ class Drum extends Component {
                                 activeOpacity={0.9}
                                 style={styles.smallDrum}
                             >
-                                {this.state.button == 2 ?<TouchableOpacity style={styles.smallDrumOutter}
+                                {this.state.button == 2 ? <TouchableOpacity style={styles.smallDrumOutter}
                                     onPress={this.onCymbalPress2.bind(this)}
                                     activeOpacity={0.1}>
-                                    <Text style={styles.smallDrumInnerAct} > </Text>
-                                </TouchableOpacity>:<TouchableOpacity style={styles.smallDrumOutter}
+                                    <Text  > </Text>
+                                </TouchableOpacity> : <TouchableOpacity style={styles.smallDrumOutter}
                                     onPress={this.onCymbalPress2.bind(this)}
                                     activeOpacity={0.1}>
-                                    <Text style={styles.smallDrumInner} > </Text>
-                                </TouchableOpacity>}
-                                
+                                        <Text style={styles.smallDrumInner} > </Text>
+                                    </TouchableOpacity>}
+
                             </TouchableHighlight>
                             <TouchableHighlight
                                 activeOpacity={0.9}
                                 style={styles.smallDrum}>
-                                {this.state.button == 3 ?<TouchableOpacity style={styles.smallDrumOutter}
-                                    onPress={this.onCymbalPress2.bind(this)}
+                                {this.state.button == 3 ? <TouchableOpacity style={styles.smallDrumOutter}
+                                    onPress={this.onCymbalPress1.bind(this)}
                                     activeOpacity={0.1}>
-                                    <Text style={styles.smallDrumInnerAct} > </Text>
-                                </TouchableOpacity>:<TouchableOpacity style={styles.smallDrumOutter}
-                                    onPress={this.onCymbalPress2.bind(this)}
+                                    <Text  > </Text>
+                                </TouchableOpacity> : <TouchableOpacity style={styles.smallDrumOutter}
+                                    onPress={this.onCymbalPress1.bind(this)}
                                     activeOpacity={0.1}>
-                                    <Text style={styles.smallDrumInner} > </Text>
-                                </TouchableOpacity>}
+                                        <Text style={styles.smallDrumInner} > </Text>
+                                    </TouchableOpacity>}
                             </TouchableHighlight>
                         </View>
                         <View
                             style={{ flexDirection: 'row', justifyContent: 'space-evenly', bottom: '15%' }}>
                             <TouchableHighlight
                                 style={styles.bigDrum}
-                                onPress={this.setScore.bind(this)}
+                                
                             >
                                 {this.state.button == 1 ?
-                                <TouchableOpacity style={styles.bigDrumOutter}
-                                    onPress={this.onBassPress1.bind(this)}
-                                    activeOpacity={0.1}>
-                                    <Text style={styles.bigDrumInneract}></Text>
-                                </TouchableOpacity>: <TouchableOpacity style={styles.bigDrumOutter}
-                                    onPress={this.onBassPress1.bind(this)}
-                                    activeOpacity={0.1}>
-                                    <Text style={styles.bigDrumInner}></Text>
-                                </TouchableOpacity>}
+                                    <TouchableOpacity style={styles.bigDrumOutter}
+                                        onPress={this.onBassPress1.bind(this)}
+                                        activeOpacity={0.1}>
+                                        <Text ></Text>
+                                    </TouchableOpacity> : <TouchableOpacity style={styles.bigDrumOutter}
+                                        onPress={this.onBassPress1.bind(this)}
+                                        activeOpacity={0.1}>
+                                        <Text style={styles.bigDrumInner}></Text>
+                                    </TouchableOpacity>}
                             </TouchableHighlight>
                             <TouchableHighlight
                                 style={styles.bigDrum}
 
                             >
                                 {this.state.button == 4 ?
-                                <TouchableOpacity style={styles.bigDrumOutter}
-                                    onPress={this.onBassPress1.bind(this)}
-                                    activeOpacity={0.1}>
-                                    <Text style={styles.bigDrumInnerbigDrumInneract}></Text>
-                                </TouchableOpacity>: <TouchableOpacity style={styles.bigDrumOutter}
-                                    onPress={this.onBassPress1.bind(this)}
-                                    activeOpacity={0.1}>
-                                    <Text style={styles.bigDrumInner}></Text>
-                                </TouchableOpacity>}
+                                    <TouchableOpacity style={styles.bigDrumOutter}
+                                        onPress={this.onBassPress2.bind(this)}
+                                        activeOpacity={0.1}>
+                                        <Text ></Text>
+                                    </TouchableOpacity> : <TouchableOpacity style={styles.bigDrumOutter}
+                                        onPress={this.onBassPress2.bind(this)}
+                                        activeOpacity={0.1}>
+                                        <Text style={styles.bigDrumInner}></Text>
+                                    </TouchableOpacity>}
                             </TouchableHighlight>
                         </View>
                     </View>
@@ -224,39 +256,6 @@ class Drum extends Component {
 }
 
 export default Drum
-
-// class BigDrum extends Component {
-//     render() {
-//         return (
-//             <TouchableHighlight
-//                 style={styles.bigDrum}
-
-//             >
-//                 <TouchableOpacity style={styles.bigDrumOutter}
-//                     onPress={this.onButtonPress.bind(this)}
-//                     activeOpacity={0.1}>
-//                     <Text style={styles.bigDrumInner}></Text>
-//                 </TouchableOpacity>
-//             </TouchableHighlight>
-//         )
-//     }
-// }
-
-// class SmallDrum extends Component {
-//     render() {
-//         return (
-//             <TouchableHighlight
-//                 activeOpacity={0.9}
-//                 style={styles.smallDrum}>
-//                 <TouchableOpacity style={styles.smallDrumOutter}
-//                     onPress={this.onButtonPress.bind(this)}
-//                     activeOpacity={0.01}>
-//                     <Text style={styles.smallDrumInner} > </Text>
-//                 </TouchableOpacity>
-//             </TouchableHighlight>
-//         )
-//     }
-// }
 
 const styles = StyleSheet.create({
     bigDrum: {
@@ -282,13 +281,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#E3A6AE',
         position: 'absolute'
     },
-    bigDrumInneract: {
-        width: 90,
-        height: 50,
-        borderRadius: 100 / 2,
-        backgroundColor: '#E3A6AE',
-        position: 'absolute'
-    },
     smallDrum: {
         width: '25%',
         height: 70,
@@ -306,12 +298,6 @@ const styles = StyleSheet.create({
     },
     smallDrumInner: {
         width: 40,
-        height: 40,
-        borderRadius: 100 / 2,
-        backgroundColor: '#B7C8CB',
-        position: 'absolute'
-    },smallDrumInneract: {
-        width: 90,
         height: 40,
         borderRadius: 100 / 2,
         backgroundColor: '#B7C8CB',
