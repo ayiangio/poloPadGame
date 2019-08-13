@@ -2,10 +2,24 @@ import React, { Component } from 'react';
 import { createAppContainer, createMaterialTopTabNavigator, createStackNavigator, createSwitchNavigator, createDrawerNavigator } from 'react-navigation';
 import Drawer from '../../Components/drawer'
 import Home from '../../Screens/home/home'
+import Login from '../../Screens/profile/login'
+import Register from '../../Screens/profile/register'
 import Board from '../../Screens/leaderBoard/leaderBoard'
 const AppNavigator = createStackNavigator({
     home: {
         screen: Home,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Login: {
+        screen: Login,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Register: {
+        screen: Register,
         navigationOptions: {
             header: null
         }

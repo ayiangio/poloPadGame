@@ -1,17 +1,24 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native'
+const url = 'http://192.168.6.141:5151'
 
 export const addUser = (data) => {
+  console.log(data)
   return {
     type: 'REGISTER',
-    payload: axios.post(`https://apilib.herokuapp.com/user/register`, data)
+    payload: axios.post(`${url}/user/register`, data, 
+    {
+      headers: {
+        "authorization": "x-control-user",
+      }
+    })
   };
 };
 export const login = (data) => {
   console.log(data)
   return {
     type: 'LOGIN',
-    payload: axios.post(`https://apilib.herokuapp.com/user/login`, data, 
+    payload: axios.post(`${url}/user/login`, data, 
     {
       headers: {
         "authorization": "x-control-user",
@@ -39,7 +46,7 @@ export const login = (data) => {
 
 export const logout = (data,jwt) => {
   return {
-    payload: axios.post(`https://apilib.herokuapp.com/user/logout`, {idUser:data},{
+    payload: axios.post(`${url}/user/logout`, {idUser:data},{
       headers: {
         "authorization": "x-control-user",
         "x-access-token": `bearer: ${jwt}`,

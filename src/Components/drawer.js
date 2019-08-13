@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 
 class DrawerDashboard extends Component {
     render() {
@@ -12,10 +12,13 @@ class DrawerDashboard extends Component {
                     <Image style={style.img}
                         source={require('../Assets/img/cicak.png')} />
                     <View style={style.login} >
-                        <TouchableOpacity  ><Text style={style.text}>Login</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() =>
+                            this.props.navigation.navigate('Login')} >
+                            <Text style={style.text}>Login</Text></TouchableOpacity>
                     </View>
                     <View style={style.register}>
-                        <TouchableOpacity ><Text style={style.text}>Register</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() =>
+                            this.props.navigation.navigate('Register')}><Text style={style.text}>Register</Text></TouchableOpacity>
                     </View>
                 </View>
             </Fragment>
@@ -28,16 +31,16 @@ const style = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical:100
+        marginVertical: 100
     },
     header: {
         top: 100,
-        position:'absolute',
+        position: 'absolute',
     },
     img: {
-      width: 60,
-      height: 170,
-      position:'absolute',
+        width: 60,
+        height: 170,
+        position: 'absolute',
     },
     head: {
         fontSize: 25,
