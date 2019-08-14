@@ -27,7 +27,7 @@ const user = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				isFulfilled: true,
-				userList: [state.userList, action.payload]
+				userList: action.payload.data.result
 			};
 		case 'GET_USER_PENDING':
 			return {

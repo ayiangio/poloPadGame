@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createAppContainer, createMaterialTopTabNavigator, createStackNavigator, createSwitchNavigator, createDrawerNavigator } from 'react-navigation';
 import Drawer from '../../Components/drawer'
+import Main from '../../Components/Main'
 import Home from '../../Screens/home/home'
 import Login from '../../Screens/profile/login'
 import Register from '../../Screens/profile/register'
@@ -20,6 +21,12 @@ const AppNavigator = createStackNavigator({
     },
     Register: {
         screen: Register,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Play: {
+        screen: Main,
         navigationOptions: {
             header: null
         }

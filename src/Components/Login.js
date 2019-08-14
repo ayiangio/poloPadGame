@@ -9,7 +9,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -21,21 +20,19 @@ class Login extends Component {
     }
 
     render() {
-        const log = () => {
+        const log = async () => {
             this.state.user.push({
                 email: this.state.email.toLocaleLowerCase(),
                 password: this.state.password.toLocaleLowerCase(),
             });
-            loginuser()
-        };
-        let loginuser = async () => {
-            await this.props.dispatch(login(this.state.user[0]))
+            this.props.dispatch(login(this.state.user[0]))
                 .then(() => {
                     // this.props.navigation.navigate("home");
-                    this.props.navigation.push('home', {
-                        onGoBack: () => this.refresh(),
-                      });
-                    console.log('berhasil')
+                    this.props.navigation.push('home');
+                })
+                .catch(() => {
+                    // this.props.navigation.navigate("home");
+                    this.props.navigation.push('home');
                 })
         };
         return (

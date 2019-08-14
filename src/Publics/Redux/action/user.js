@@ -24,22 +24,14 @@ export const login = (data) => {
         "authorization": "x-control-user",
       }
     } ).then(res => {
-      const token = res.data.result.token
       const idUser = res.data.result.idUser.toString()
       const fullName = res.data.result.fullName
+      const token = res.data.result.token
       const email = res.data.result.email
-      const status = res.data.result.status
-      console.log(fullName)
-      // AsyncStorage.removeItem('idUser');
-      // AsyncStorage.removeItem('jwtToken');
-      // AsyncStorage.removeItem('fullName');
-      // AsyncStorage.removeItem('email');
-      // AsyncStorage.removeItem('status');
       AsyncStorage.setItem('idUser', idUser)
       AsyncStorage.setItem('jwtToken', token)
       AsyncStorage.setItem('fullName', fullName)
       AsyncStorage.setItem('email', email)
-      AsyncStorage.setItem('status', status)
     })
   };
 };

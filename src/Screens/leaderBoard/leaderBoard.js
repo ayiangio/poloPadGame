@@ -6,7 +6,8 @@ import {
   View,
   Image,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import Leaderboard from 'react-native-leaderboard'
 import { connect } from 'react-redux';
@@ -14,23 +15,28 @@ import { getScore } from '../../Publics/Redux/action/board'
 import { getScoreId } from '../../Publics/Redux/action/board'
 
 class boards extends Component {
-  state = {
-    data: [],
-    userData:{}
+  constructor(props) {
+    super(props)
+      this.state = {  
+        data: [],
+        userData:{},
+        user:{}
+    }; 
 }
 componentDidMount = async () => {
   await this.props.dispatch(getScore());
   this.setState({
-    data: this.props.score
+    data: this.props.score,
+    user : this.props.user
   });
-  await this.props.dispatch(getScoreId(2));
+  await this.props.dispatch(getScoreId(this.props.navigation.getParam('idUser')));
   this.setState({
     userData: this.props.userId[0]
   });
   
 };
   render() {
-    console.log(this.state.userData)
+    console.log(this.state.user.fullName)
     return (
       <View style={style.container}>
         <View style={style.header}>
@@ -39,10 +45,15 @@ componentDidMount = async () => {
               fontSize: 20,
               color: 'black',
             }}>Nama </Text>
+            {this.state.userData?
             <Text style={{
               fontSize: 20,
               color: 'black',
-            }}>{this.state.userData.fullName}</Text>
+            }}>{this.state.userData.fullName }</Text>:
+            <Text style={{
+              fontSize: 20,
+              color: 'black',
+            }}>{this.state.user.fullName }</Text>}
           </View>
           <View>
             <Image style={style.img}
@@ -53,10 +64,15 @@ componentDidMount = async () => {
               fontSize: 20,
               color: 'black',
             }}>High Score</Text>
+            {this.state.userData?
             <Text style={{
               fontSize: 20,
               color: 'black',
-            }}>{this.state.userData.score}</Text>
+            }}>{this.state.userData.score }</Text>:
+            <Text style={{
+              fontSize: 20,
+              color: 'black',
+            }}>{this.state.user.score }</Text>}
           </View>
         </View>
         <View>
@@ -72,7 +88,8 @@ componentDidMount = async () => {
 const mapStateToProps = (state) => {
   return {
     score: state.board.scoreList,
-    userId : state.board.listId
+    userId : state.board.listId,
+    user:state.board.scoreList[0]
   };
 };
 export default connect(mapStateToProps)(boards);

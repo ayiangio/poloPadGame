@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableHighlight, Text, Image, Alert } from 'react-native'
+import { View, StyleSheet, TouchableHighlight, Text, Image, Alert,AsyncStorage } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { addScore } from '../../src/Publics/Redux/action/board'
 import Sound from "react-native-sound";
@@ -8,17 +8,20 @@ class Drum extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            combo: 5,
+            combo: 0,
             score: 0,
-            pattern: [1,2,3,2,2,3,2,3,4, 4, 4, 4, 2],
+            pattern: [1,2,3,1,3,1,1,2,4,2,3,4,4,1,2,3,4, 4, 4, 4,4,1, 2],
             isNow: 0,
-            button: 1
+            button: 1,
+            
         };
     }
+    add = async() =>{
+        const idUser = await AsyncStorage.getItem('idUser')
+        console.log(idUser)
+    }
     onBassPress1 = async () => {
-        if(this.state.combo === 0){
-            alert('Congratulation')
-        }
+        
         console.log("Tombol " + 1)
         const requireAudio = require('../Assets/snare.wav');
         const requireNext = require('../Assets/next.wav');
@@ -27,7 +30,7 @@ class Drum extends Component {
         if (this.state.pattern[this.state.isNow] === 1) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1,
+                    combo: this.state.combo +1,
                     isNow: 0
                 })
                 next.play(() => next.release())
@@ -40,12 +43,21 @@ class Drum extends Component {
         }
         
         else {
-            alert('Sorry You Lose')
+            Alert.alert(
+                'Lose !!!',
+                `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                [
+                  { text: 'Save Score', 
+                    onPress: () => console.log('OK Pressed')
+                  },
+                  
+                ],
+              );
             await this.setState({
                 score: 0,
                 hasil: 0,
                 isNow: 0,
-                combo: 5
+                combo: 0
             })
         }
         await this.setState({
@@ -55,9 +67,7 @@ class Drum extends Component {
         console.log("Cpmbo " + this.state.combo)
     }
     onBassPress2 = async () => {
-        if(this.state.combo === 0){
-            alert('Congratulation')
-        }
+        
         console.log("Tombol " + 4)
         const requireAudio = require('../Assets/snare.wav');
         const requireNext = require('../Assets/next.wav');
@@ -66,7 +76,7 @@ class Drum extends Component {
         if (this.state.pattern[this.state.isNow] === 4) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1,
+                    combo: this.state.combo +1,
                     isNow: 0
                 })
                 next.play(() => next.release())
@@ -78,12 +88,25 @@ class Drum extends Component {
 
         }
         else {
-            alert('Sorry You Lose')
+            Alert.alert(
+                'Lose !!!',
+                `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                [
+                  { text: 'Save Score', 
+                    onPress: () => console.log('OK Pressed')
+                  },
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    
+                  },
+                ],
+              );
             await this.setState({
                 score: 0,
                 hasil: 0,
                 isNow: 0,
-                combo: 5
+                combo: 0
             })
         }
         await this.setState({
@@ -93,9 +116,7 @@ class Drum extends Component {
         console.log("Combo " + this.state.combo)
     }
     onCymbalPress2 = async () => {
-        if(this.state.combo === 0){
-            alert('Congratulation')
-        }
+        
         console.log("Tombol " + 2)
         const requireAudio = require('../Assets/cymbal.wav');
         const requireNext = require('../Assets/next.wav');
@@ -104,7 +125,7 @@ class Drum extends Component {
         if (this.state.pattern[this.state.isNow] === 2) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1,
+                    combo: this.state.combo + 1,
                     isNow: 0
                 })
                 next.play(() => next.release())
@@ -116,24 +137,36 @@ class Drum extends Component {
 
         }
         else {
-            alert('Sorry You Lose')
+            Alert.alert(
+                'Lose !!!',
+                `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                [
+                  { text: 'Save Score', 
+                    onPress: () => console.log('OK Pressed')
+                  },
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    
+                  },
+                ],
+              );
             await this.setState({
                 score: 0,
                 hasil: 0,
                 isNow: 0,
-                combo: 5
+                combo: 0
             })
         }
         await this.setState({
             button: this.state.pattern[this.state.isNow]
         })
+        
         console.log("Score " + this.state.score)
         console.log("Cpmbo " + this.state.combo)
     }
     onCymbalPress1 = async () => {
-        if(this.state.combo === 0){
-            alert('Congratulation')
-        }
+        
         console.log("Tombol " + 3)
         const requireAudio = require('../Assets/cymbal.wav');
         const requireNext = require('../Assets/next.wav');
@@ -142,7 +175,7 @@ class Drum extends Component {
         if (this.state.pattern[this.state.isNow] === 3) {
             if (this.state.pattern.length === this.state.isNow + 1) {
                 await this.setState({
-                    combo: this.state.combo - 1,
+                    combo: this.state.combo +1,
                     isNow: 0
                 })
                 next.play()
@@ -172,7 +205,7 @@ class Drum extends Component {
                 score: 0,
                 hasil: 0,
                 isNow: 0,
-                combo: 5
+                combo: 0
             })
         }
         await this.setState({
@@ -184,16 +217,18 @@ class Drum extends Component {
     render() {
         return (
             <>
-                <View style={{ marginTop: -320 }}>
-                    <Text style={{ textAlign: 'center', fontSize: 50 }} >SCORE</Text>
-                    <Text style={{ textAlign: 'center', fontSize: 50 }}>{this.state.score}</Text>
-                </View>
-                <View style={{ marginTop: 50 }}>
-                    <Text style={{ textAlign: 'center', fontSize: 20 }}>Combo Ke - {this.state.combo}</Text>
-                </View>
+                <View style={{marginTop:40}}>
+                    <View >
+                        <Text style={{ textAlign: 'center', fontSize: 50 }} >SCORE</Text>
+                        <Text style={{ textAlign: 'center', fontSize: 50 }}>{this.state.score}</Text>
+                    </View>
+                    <View style={{ marginTop: 50 }}>
+                        <Text style={{ textAlign: 'center', fontSize: 20 }}>Combo Ke - {this.state.combo}</Text>
+                    </View>
+                </View>                
                 <View style={styles.container}>
-                    <Image style={{ width: 370, height: 230, position: 'absolute', top: 270 }} source={require('../Assets/img/bg.png')} />
-                    <View style={{ top: '5%' }}>
+                    <Image style={{ width: 370, height: 230, position: 'absolute', top: 370 }} source={require('../Assets/img/bg.png')} />                    
+                    <View style={{ marginTop:-210 }}>
                         <View
                             style={{ flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 100 }}>
                             <TouchableHighlight
@@ -259,6 +294,7 @@ class Drum extends Component {
                             </TouchableHighlight>
                         </View>
                     </View>
+                    
                 </View>
             </>
         )
