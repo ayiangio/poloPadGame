@@ -11,19 +11,26 @@ import {
 import Leaderboard from 'react-native-leaderboard'
 import { connect } from 'react-redux';
 import { getScore } from '../../Publics/Redux/action/board'
+import { getScoreId } from '../../Publics/Redux/action/board'
 
 class boards extends Component {
   state = {
-    data: []
+    data: [],
+    userData:{}
 }
 componentDidMount = async () => {
   await this.props.dispatch(getScore());
   this.setState({
     data: this.props.score
   });
+  await this.props.dispatch(getScoreId(2));
+  this.setState({
+    userData: this.props.userId[0]
+  });
+  
 };
   render() {
-    console.log(this.state.data)
+    console.log(this.state.userData)
     return (
       <View style={style.container}>
         <View style={style.header}>
@@ -31,11 +38,11 @@ componentDidMount = async () => {
             <Text style={{
               fontSize: 20,
               color: 'black',
-            }}>Rank </Text>
+            }}>Nama </Text>
             <Text style={{
               fontSize: 20,
               color: 'black',
-            }}>100</Text>
+            }}>{this.state.userData.fullName}</Text>
           </View>
           <View>
             <Image style={style.img}
@@ -45,11 +52,11 @@ componentDidMount = async () => {
             <Text style={{
               fontSize: 20,
               color: 'black',
-            }}>Point </Text>
+            }}>High Score</Text>
             <Text style={{
               fontSize: 20,
               color: 'black',
-            }}>1000</Text>
+            }}>{this.state.userData.score}</Text>
           </View>
         </View>
         <View>
@@ -65,7 +72,7 @@ componentDidMount = async () => {
 const mapStateToProps = (state) => {
   return {
     score: state.board.scoreList,
-   
+    userId : state.board.listId
   };
 };
 export default connect(mapStateToProps)(boards);

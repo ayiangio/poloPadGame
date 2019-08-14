@@ -25,3 +25,14 @@ export const getScore = () => {
       })
     };
   };
+  export const getScoreId = (idUser) => {
+    return {
+      type: 'GET_SCORE_ID',
+      payload: axios.get(`${url}/score/${Number(idUser)}`, 
+      {
+        headers: {
+          "authorization": "x-control-user",
+        }
+      })
+    };
+  };

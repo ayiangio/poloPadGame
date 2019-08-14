@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableHighlight, Text, Image } from 'react-native'
+import { View, StyleSheet, TouchableHighlight, Text, Image, Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { addScore } from '../../src/Publics/Redux/action/board'
 import Sound from "react-native-sound";
 
 class Drum extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            hasil: 0,
             combo: 5,
             score: 0,
             pattern: [1,2,3,2,2,3,2,3,4, 4, 4, 4, 2],
@@ -154,7 +154,20 @@ class Drum extends Component {
 
         }
         else {
-            alert('Sorry You Lose')
+            Alert.alert(
+                'Lose !!!',
+                `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                [
+                  { text: 'Save Score', 
+                    onPress: () => console.log('OK Pressed')
+                  },
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    
+                  },
+                ],
+              );
             await this.setState({
                 score: 0,
                 hasil: 0,
@@ -169,9 +182,6 @@ class Drum extends Component {
         console.log("Cpmbo " + this.state.combo)
     }
     render() {
-        // this.setState({
-        //     button : this.state.pattern[0]
-        // })
         return (
             <>
                 <View style={{ marginTop: -320 }}>
