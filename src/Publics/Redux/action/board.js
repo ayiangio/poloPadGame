@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AsyncStorage } from 'react-native'
 const url = 'http://192.168.6.141:5151'
 
-export const addScore = (data) => {
+export const addScore = (idUser,jwt,data) => {
   console.log(data)
   return {
     type: 'ADD_SCORE',
@@ -10,7 +10,9 @@ export const addScore = (data) => {
     {
       headers: {
         "authorization": "x-control-user",
-      }
+        "x-access-token": `bearer: ${jwt}`,
+        "x-control-user": idUser
+      }  
     })
   };
 };

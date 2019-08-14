@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
-import { View, StyleSheet, TouchableHighlight, Text, Image, Alert,AsyncStorage } from 'react-native'
+import React, { Component } from 'react';
+import { View, StyleSheet, TouchableHighlight, Text, Image, Alert,AsyncStorage } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { addScore } from '../../src/Publics/Redux/action/board'
+import { addScore } from '../../src/Publics/Redux/action/board';
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import Sound from "react-native-sound";
 
 class Drum extends Component {
@@ -13,12 +15,39 @@ class Drum extends Component {
             pattern: [1,2,3,1,3,1,1,2,4,2,3,4,4,1,2,3,4, 4, 4, 4,4,1, 2],
             isNow: 0,
             button: 1,
-            
+            id:'',
+            token:''
         };
+        AsyncStorage.getItem('idUser', (error, result) => {
+            if (result) {
+                this.setState({
+                    id: result,
+                });
+            }
+        });
+        AsyncStorage.getItem('jwtToken', (error, result) => {
+            if (result) {
+                this.setState({
+                    token: result,
+                });
+            }
+        });
     }
-    add = async() =>{
-        const idUser = await AsyncStorage.getItem('idUser')
-        console.log(idUser)
+    add = () =>{
+        console.log(this.state.token)
+        const data = {
+            idUser : Number(this.state.id),
+            score : this.state.score
+        }
+         this.props.dispatch(addScore(Number(this.state.id),this.state.token,data))
+        .then(() => {
+             this.setState({
+                score: 0,
+                hasil: 0,
+                isNow: 0,
+                combo: 0
+            })
+        })
     }
     onBassPress1 = async () => {
         
@@ -48,17 +77,11 @@ class Drum extends Component {
                 `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
                 [
                   { text: 'Save Score', 
-                    onPress: () => console.log('OK Pressed')
+                    onPress: () => this.add()
                   },
                   
                 ],
               );
-            await this.setState({
-                score: 0,
-                hasil: 0,
-                isNow: 0,
-                combo: 0
-            })
         }
         await this.setState({
             button: this.state.pattern[this.state.isNow]
@@ -93,21 +116,10 @@ class Drum extends Component {
                 `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
                 [
                   { text: 'Save Score', 
-                    onPress: () => console.log('OK Pressed')
-                  },
-                  {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    
+                    onPress: () => this.add()
                   },
                 ],
               );
-            await this.setState({
-                score: 0,
-                hasil: 0,
-                isNow: 0,
-                combo: 0
-            })
         }
         await this.setState({
             button: this.state.pattern[this.state.isNow]
@@ -142,21 +154,10 @@ class Drum extends Component {
                 `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
                 [
                   { text: 'Save Score', 
-                    onPress: () => console.log('OK Pressed')
-                  },
-                  {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    
+                    onPress: () => this.add()
                   },
                 ],
               );
-            await this.setState({
-                score: 0,
-                hasil: 0,
-                isNow: 0,
-                combo: 0
-            })
         }
         await this.setState({
             button: this.state.pattern[this.state.isNow]
@@ -192,21 +193,10 @@ class Drum extends Component {
                 `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
                 [
                   { text: 'Save Score', 
-                    onPress: () => console.log('OK Pressed')
-                  },
-                  {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    
+                    onPress: () => this.add()
                   },
                 ],
               );
-            await this.setState({
-                score: 0,
-                hasil: 0,
-                isNow: 0,
-                combo: 0
-            })
         }
         await this.setState({
             button: this.state.pattern[this.state.isNow]
@@ -214,6 +204,7 @@ class Drum extends Component {
         console.log("Score " + this.state.score)
         console.log("Cpmbo " + this.state.combo)
     }
+    
     render() {
         return (
             <>
@@ -301,7 +292,12 @@ class Drum extends Component {
     }
 }
 
-export default Drum
+const mapStateToProps = state => {
+    return {
+      user: state.user.userList
+    };
+  };
+export default connect(mapStateToProps)(withNavigation(Drum))
 
 const styles = StyleSheet.create({
     bigDrum: {
