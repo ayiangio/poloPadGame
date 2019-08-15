@@ -21,47 +21,46 @@ class Login extends Component {
 
     render() {
         const log = async () => {
-            this.state.user.push({
+            await this.state.user.push({
                 email: this.state.email.toLocaleLowerCase(),
                 password: this.state.password.toLocaleLowerCase(),
             });
-            this.props.dispatch(login(this.state.user[0]))
-                .then(() => {
-                    // this.props.navigation.navigate("home");
-                    this.props.navigation.push('home');
-                })
-                .catch(() => {
-                    // this.props.navigation.navigate("home");
-                    this.props.navigation.push('home');
-                })
-        };
-        return (
-            <View style={styles.container}>
-                <Text style={styles.title}>Login </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder="Email"
-                    placeholderTextColor="black"
-                    keyboardType="email-address"
-                    onSubmitEditing={() => this.password.focus()}
-                    onChangeText={(email) => this.setState({ email })}
-                />
-                <TextInput style={styles.inputBox}
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    placeholderTextColor="black"
-                    ref={(input) => this.password = input}
-                    onChangeText={(password) => this.setState({ password })}
-                />
-                <TouchableOpacity style={styles.button} onPress={log}>
-                    <Text style={styles.buttonText}>{this.props.type}</Text>
-                </TouchableOpacity>
+            await this.props.dispatch(login(this.state.user[0]))
+            .then((res)=>{
+                const name = res.action.payload.data.result.fullName
+                this.props.navigation.push('home',{
+                    name: name
+                });
+            })
+            
+    };
+    return(
+            <View style = { styles.container } >
+            <Text style={styles.title}>Login </Text>
+            <TextInput style={styles.inputBox}
+                placeholder="Email"
+                placeholderTextColor="black"
+                keyboardType="email-address"
+                onSubmitEditing={() => this.password.focus()}
+                onChangeText={(email) => this.setState({ email })}
+            />
+            <TextInput style={styles.inputBox}
+                placeholder="Password"
+                secureTextEntry={true}
+                placeholderTextColor="black"
+                ref={(input) => this.password = input}
+                onChangeText={(password) => this.setState({ password })}
+            />
+            <TouchableOpacity style={styles.button} onPress={log}>
+                <Text style={styles.buttonText}>{this.props.type}</Text>
+            </TouchableOpacity>
             </View>
         )
     }
 }
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user.login
     };
 };
 export default connect(mapStateToProps)(withNavigation(Login))

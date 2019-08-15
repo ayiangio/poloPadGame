@@ -1,49 +1,39 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native'
-const url = 'http://192.168.6.141:5151'
+const url = 'https://apipolopad.herokuapp.com'
 
 export const addUser = (data) => {
   console.log(data)
   return {
     type: 'REGISTER',
-    payload: axios.post(`${url}/user/register`, data, 
-    {
-      headers: {
-        "authorization": "x-control-user",
-      }
-    })
+    payload: axios.post(`${url}/user/register`, data,
+      {
+        headers: {
+          "authorization": "x-control-user",
+        }
+      })
   };
 };
 export const login = (data) => {
-  console.log(data)
   return {
     type: 'LOGIN',
-    payload: axios.post(`${url}/user/login`, data, 
-    {
-      headers: {
-        "authorization": "x-control-user",
-      }
-    } ).then(res => {
-      const idUser = res.data.result.idUser.toString()
-      const fullName = res.data.result.fullName
-      const token = res.data.result.token
-      const email = res.data.result.email
-      AsyncStorage.setItem('idUser', idUser)
-      AsyncStorage.setItem('jwtToken', token)
-      AsyncStorage.setItem('fullName', fullName)
-      AsyncStorage.setItem('email', email)
-    })
+    payload: axios.post(`${url}/user/login`, data,
+      {
+        headers: {
+          "authorization": "x-control-user",
+        }
+      })
   };
 };
 
-export const logout = (data,jwt) => {
+export const logout = (data, jwt) => {
   return {
-    payload: axios.post(`${url}/user/logout`, {idUser:data},{
+    payload: axios.post(`${url}/user/logout`, { idUser: data }, {
       headers: {
         "authorization": "x-control-user",
         "x-access-token": `bearer: ${jwt}`,
         "x-control-user": data
-      }      
+      }
     })
   };
 };

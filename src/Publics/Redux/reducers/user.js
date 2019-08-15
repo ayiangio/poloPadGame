@@ -1,9 +1,11 @@
+import { AsyncStorage } from 'react-native'
 const initialState = {
 	userList: [],
 	isLoading: false,
 	isFulfilled: false,
 	isRejected: false,
-	token:''
+	token: '',
+	login: null
 };
 
 const user = (state = initialState, action) => {
@@ -22,12 +24,19 @@ const user = (state = initialState, action) => {
 				isRejected: true
 			};
 		case 'LOGIN_FULFILLED':
-			// state.userList.push(action.payload.data);
+			const idUser = action.payload.data.result.idUser.toString()
+			const fullName = action.payload.data.result.fullName
+			const token = action.payload.data.result.token
+			const email = action.payload.data.result.email
+			AsyncStorage.setItem('idUser', idUser)
+			AsyncStorage.setItem('jwtToken', token)
+			AsyncStorage.setItem('fullName', fullName)
+			AsyncStorage.setItem('email', email)
 			return {
 				...state,
 				isLoading: false,
 				isFulfilled: true,
-				userList: action.payload.data.result
+				login: [state.login, action.payload]
 			};
 		case 'GET_USER_PENDING':
 			return {

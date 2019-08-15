@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native'
-const url = 'http://192.168.6.141:5151'
+const url = 'https://apipolopad.herokuapp.com'
 
 export const addScore = (idUser,jwt,data) => {
   console.log(data)
@@ -34,6 +34,17 @@ export const getScore = () => {
     return {
       type: 'GET_SCORE',
       payload: axios.get(`${url}/score`, 
+      {
+        headers: {
+          "authorization": "x-control-user",
+        }
+      })
+    };
+  };
+  export const getPattern = () => {
+    return {
+      type: 'GET_PATTERN',
+      payload: axios.get(`${url}/pattern`, 
       {
         headers: {
           "authorization": "x-control-user",

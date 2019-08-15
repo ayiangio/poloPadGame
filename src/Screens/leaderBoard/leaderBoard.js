@@ -44,7 +44,7 @@ componentDidMount = async () => {
             <Text style={{
               fontSize: 20,
               color: 'black',
-            }}>Nama </Text>
+            }}>Name </Text>
             {this.state.userData?
             <Text style={{
               fontSize: 20,
@@ -55,19 +55,21 @@ componentDidMount = async () => {
               color: 'black',
             }}>{this.state.user.fullName }</Text>}
           </View>
+          
           <View>
+            {/* {this.state.userData? <Text style={{position:'absolute',fontSize:20,textAlign:'center',marginLeft:'43%',top:8}}>{this.state.userData.fullName}</Text> : <Text style={{position:'absolute',fontSize:20,marginLeft:'43%',top:8}}>{this.state.user.fullName}</Text>} */}
             <Image style={style.img}
-              source={require('../../Assets/img/user.png')} />
+              source={require('../../Assets/img/user.jpg')} />              
           </View>
           <View style={style.text2}>
             <Text style={{
               fontSize: 20,
-              color: 'black',
-            }}>High Score</Text>
+              color: 'black'
+            }}>Score</Text>
             {this.state.userData?
             <Text style={{
               fontSize: 20,
-              color: 'black',
+              color: 'black',left:10
             }}>{this.state.userData.score }</Text>:
             <Text style={{
               fontSize: 20,
@@ -79,7 +81,8 @@ componentDidMount = async () => {
         <Leaderboard 
         data={this.state.data} 
         sortBy='score' 
-        labelBy='fullName'/>
+        labelBy='fullName'
+        />
         </View>
       </View>
     )

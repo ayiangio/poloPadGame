@@ -13,37 +13,55 @@ class DrawerDashboard extends Component {
             id:''
         };
     }
-    componentDidMount  () {
-         this.store()
-    }    
+    componentDidMount(){
+        // this.subs=[
+        //     this.props.navigation.addListener('willFocus', () => {
+        //         this.store()
+        //     }) 
+        // ]     
+        this.store()
+    }
+
+    // componentWillUnmount(){  
+    //     this.subs.forEach(sub => {
+    //         sub.remove()
+    //     })
+    // }  
     store = async ()=>  {
-        this.setState({
-            name : await AsyncStorage.getItem('fullName'),
-            email : await AsyncStorage.getItem('email'),
-            id : await AsyncStorage.getItem('idUser'),
-            token : await AsyncStorage.getItem('jwtToken'),
+        // this.setState({
+        //     name : this.props.navigation.getParam('button'),
+        //     email : await AsyncStorage.getItem('email'),
+        //     id : await AsyncStorage.getItem('idUser'),
+        //     token : await AsyncStorage.getItem('jwtToken'),
+        // });
+        await AsyncStorage.getItem('email', (error, result) => {
+            if (result) {
+                this.setState({
+                    email: result,
+                });
+            }
         });
-        // AsyncStorage.getItem('email', (error, result) => {
-        //     if (result) {
-        //         this.setState({
-        //             email: result,
-        //         });
-        //     }
-        // });
-        // AsyncStorage.getItem('idUser', (error, result) => {
-        //     if (result) {
-        //         this.setState({
-        //             id: result,
-        //         });
-        //     }
-        // });
-        // AsyncStorage.getItem('jwtToken', (error, result) => {
-        //     if (result) {
-        //         this.setState({
-        //             token: result,
-        //         });
-        //     }
-        // });
+        await AsyncStorage.getItem('fullName', (error, result) => {
+            if (result) {
+                this.setState({
+                    name: result,
+                });
+            }
+        });
+        await AsyncStorage.getItem('idUser', (error, result) => {
+            if (result) {
+                this.setState({
+                    id: result,
+                });
+            }
+        });
+        await AsyncStorage.getItem('jwtToken', (error, result) => {
+            if (result) {
+                this.setState({
+                    token: result,
+                });
+            }
+        });
     }
     logout  () {
         console.log('masuk')
@@ -57,13 +75,13 @@ class DrawerDashboard extends Component {
     render() {
         return (
             <Fragment >
-            {this.state.name ? 
+            {this.state.id ? 
             <View style={style.container}>
                     <View style={style.header}>
                         <Text style={style.head}>Welcome {this.state.name}</Text>
                     </View>
                     <Image style={style.img}
-                        source={require('../Assets/img/cicak.png')} />
+                        source={require('../Assets/img/cicak.jpg')} />
                     <View style={style.login} >
                         <TouchableOpacity onPress={this.logout.bind(this)} >
                             <Text style={style.text}>Logout</Text>
@@ -79,7 +97,7 @@ class DrawerDashboard extends Component {
                         <Text style={style.head}>Welcome To Polopad</Text>
                     </View>
                     <Image style={style.img}
-                        source={require('../Assets/img/cicak.png')} />
+                        source={require('../Assets/img/cicak.jpg')} />
                     <View style={style.login} >
                         <TouchableOpacity onPress={() =>
                             this.props.navigation.navigate('Login')} >
