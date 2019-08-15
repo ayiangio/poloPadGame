@@ -16,6 +16,20 @@ export const addScore = (idUser,jwt,data) => {
     })
   };
 };
+export const updateScore = (idUser,jwt,data) => {
+  console.log(data)
+  return {
+    type: 'UPDATE_SCORE',
+    payload: axios.patch(`${url}/score`, data, 
+    {
+      headers: {
+        "authorization": "x-control-user",
+        "x-access-token": `bearer: ${jwt}`,
+        "x-control-user": idUser
+      }  
+    })
+  };
+};
 export const getScore = () => {
     return {
       type: 'GET_SCORE',

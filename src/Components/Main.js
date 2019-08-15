@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TouchableHighlight, Text, Image, Alert,AsyncStorage } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { addScore } from '../../src/Publics/Redux/action/board';
+import { updateScore } from '../../src/Publics/Redux/action/board';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import Sound from "react-native-sound";
@@ -13,10 +14,13 @@ class Drum extends Component {
             combo: 0,
             score: 0,
             pattern: [1,2,3,1,3,1,1,2,4,2,3,4,4,1,2,3,4, 4, 4, 4,4,1, 2],
+            pattern2:this.props.navigation.getParam('pattern'),
             isNow: 0,
             button: 1,
+            time:null,
             id:'',
-            token:''
+            token:null,
+            data : this.props.navigation.getParam('data'),
         };
         AsyncStorage.getItem('idUser', (error, result) => {
             if (result) {
@@ -34,23 +38,82 @@ class Drum extends Component {
         });
     }
     add = () =>{
-        console.log(this.state.token)
-        const data = {
-            idUser : Number(this.state.id),
-            score : this.state.score
+        if(this.state.data === undefined){
+            console.log("Token",this.state.token)
+            if(this.state.token === null){
+                Alert.alert(
+                    'Not Login !!!',
+                    `Your Cant Save The Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                    [
+                      { text: 'Go To Login', 
+                        onPress: () => this.props.navigation.push('Login')
+                      },
+                      { text: 'Cancel ', 
+                      onPress: () => this.props.navigation.push('home')
+                    },
+                      
+                    ],
+                  );
+                  this.setState({
+                    score: 0,
+                    hasil: 0,
+                    isNow: 0,
+                    combo: 0
+                })
+            }
+            else{
+                console.log(this.state.token)
+                const data = {
+                    idUser : Number(this.state.id),
+                    score : this.state.score
+                }
+                this.props.dispatch(addScore(Number(this.state.id),this.state.token,data))
+                .then(() => {
+                    this.setState({
+                        score: 0,
+                        hasil: 0,
+                        isNow: 0,
+                        combo: 0
+                    })
+                    this.props.navigation.push('home');
+                })
+            }
+            
         }
-         this.props.dispatch(addScore(Number(this.state.id),this.state.token,data))
-        .then(() => {
-             this.setState({
-                score: 0,
-                hasil: 0,
-                isNow: 0,
-                combo: 0
-            })
-        })
+        else{
+            console.log(this.state.data.score )
+            if(this.state.data.score < this.state.score)
+            {
+                console.log(this.state.data.score )
+                const data = {
+                    idUser : Number(this.state.id),
+                    score : this.state.score
+                }
+                this.props.dispatch(updateScore(Number(this.state.id),this.state.token,data))
+                .then(() => {
+                    this.setState({
+                        score: 0,
+                        hasil: 0,
+                        isNow: 0,
+                        combo: 0
+                    })
+                    this.props.navigation.push('home');
+                })
+            }
+            else{
+                this.setState({
+                    score: 0,
+                    hasil: 0,
+                    isNow: 0,
+                    combo: 0
+                })
+                this.props.navigation.push('home');
+            }
+                
+        }
+        
     }
     onBassPress1 = async () => {
-        
         console.log("Tombol " + 1)
         const requireAudio = require('../Assets/snare.wav');
         const requireNext = require('../Assets/next.wav');
@@ -83,14 +146,35 @@ class Drum extends Component {
                 ],
               );
         }
+        if (this.state.timer) {
+            clearTimeout(this.state.timer); //cancel the previous timer.
+            this.setState({
+              timer :null
+            })
+        }
+        await this.setState({
+            timer :setTimeout(()=>{ 
+              this.setState({
+                button:this.state.button * 0
+              })
+              Alert.alert(
+                  'Time out !!!',
+                  `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                  [
+                    { text: 'Save Score', 
+                      onPress: () => this.add()
+                    },                  
+                  ],
+                );
+            }, 3000)
+        })
         await this.setState({
             button: this.state.pattern[this.state.isNow]
         })
         console.log("Score " + this.state.score)
         console.log("Cpmbo " + this.state.combo)
     }
-    onBassPress2 = async () => {
-        
+    onBassPress2 = async () => {        
         console.log("Tombol " + 4)
         const requireAudio = require('../Assets/snare.wav');
         const requireNext = require('../Assets/next.wav');
@@ -121,6 +205,28 @@ class Drum extends Component {
                 ],
               );
         }
+        if (this.state.timer) {
+            clearTimeout(this.state.timer); //cancel the previous timer.
+            this.setState({
+              timer :null
+            })
+        }
+        await this.setState({
+            timer :setTimeout(()=>{ 
+              this.setState({
+                button:this.state.button * 0
+              })
+              Alert.alert(
+                  'Time out !!!',
+                  `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                  [
+                    { text: 'Save Score', 
+                      onPress: () => this.add()
+                    },                  
+                  ],
+                );
+            }, 3000)
+        })
         await this.setState({
             button: this.state.pattern[this.state.isNow]
         })
@@ -159,6 +265,28 @@ class Drum extends Component {
                 ],
               );
         }
+        if (this.state.timer) {
+            clearTimeout(this.state.timer); //cancel the previous timer.
+            this.setState({
+              timer :null
+            })
+        }        
+        await this.setState({
+            timer :setTimeout(()=>{ 
+              this.setState({
+                button:this.state.button * 0
+              })
+              Alert.alert(
+                  'Time out !!!',
+                  `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                  [
+                    { text: 'Save Score', 
+                      onPress: () => this.add()
+                    },                  
+                  ],
+                );
+            }, 3000)
+        })
         await this.setState({
             button: this.state.pattern[this.state.isNow]
         })
@@ -198,6 +326,28 @@ class Drum extends Component {
                 ],
               );
         }
+        if (this.state.timer) {
+            clearTimeout(this.state.timer); //cancel the previous timer.
+            this.setState({
+              timer :null
+            })
+        }
+        await this.setState({
+          timer :setTimeout(()=>{ 
+            this.setState({
+              button:this.state.button * 0
+            })
+            Alert.alert(
+                'Time out !!!',
+                `Your Score : ${this.state.score}`, // <- this part is optional, you can pass an empty string
+                [
+                  { text: 'Save Score', 
+                    onPress: () => this.add()
+                  },                  
+                ],
+              );
+          }, 3000)
+        })
         await this.setState({
             button: this.state.pattern[this.state.isNow]
         })
@@ -206,6 +356,7 @@ class Drum extends Component {
     }
     
     render() {
+        console.log(this.state.data)
         return (
             <>
                 <View style={{marginTop:40}}>

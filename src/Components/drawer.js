@@ -12,34 +12,38 @@ class DrawerDashboard extends Component {
             token:'',
             id:''
         };
-        AsyncStorage.getItem('fullName', (error, result) => {
-            if (result) {
-                this.setState({
-                    name: result,
-                });
-            }
+    }
+    componentDidMount  () {
+         this.store()
+    }    
+    store = async ()=>  {
+        this.setState({
+            name : await AsyncStorage.getItem('fullName'),
+            email : await AsyncStorage.getItem('email'),
+            id : await AsyncStorage.getItem('idUser'),
+            token : await AsyncStorage.getItem('jwtToken'),
         });
-        AsyncStorage.getItem('email', (error, result) => {
-            if (result) {
-                this.setState({
-                    email: result,
-                });
-            }
-        });
-        AsyncStorage.getItem('idUser', (error, result) => {
-            if (result) {
-                this.setState({
-                    id: result,
-                });
-            }
-        });
-        AsyncStorage.getItem('jwtToken', (error, result) => {
-            if (result) {
-                this.setState({
-                    token: result,
-                });
-            }
-        });
+        // AsyncStorage.getItem('email', (error, result) => {
+        //     if (result) {
+        //         this.setState({
+        //             email: result,
+        //         });
+        //     }
+        // });
+        // AsyncStorage.getItem('idUser', (error, result) => {
+        //     if (result) {
+        //         this.setState({
+        //             id: result,
+        //         });
+        //     }
+        // });
+        // AsyncStorage.getItem('jwtToken', (error, result) => {
+        //     if (result) {
+        //         this.setState({
+        //             token: result,
+        //         });
+        //     }
+        // });
     }
     logout  () {
         console.log('masuk')
