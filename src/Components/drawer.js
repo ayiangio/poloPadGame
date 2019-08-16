@@ -14,26 +14,9 @@ class DrawerDashboard extends Component {
         };
     }
     componentDidMount(){
-        // this.subs=[
-        //     this.props.navigation.addListener('willFocus', () => {
-        //         this.store()
-        //     }) 
-        // ]     
         this.store()
     }
-
-    // componentWillUnmount(){  
-    //     this.subs.forEach(sub => {
-    //         sub.remove()
-    //     })
-    // }  
     store = async ()=>  {
-        // this.setState({
-        //     name : this.props.navigation.getParam('button'),
-        //     email : await AsyncStorage.getItem('email'),
-        //     id : await AsyncStorage.getItem('idUser'),
-        //     token : await AsyncStorage.getItem('jwtToken'),
-        // });
         await AsyncStorage.getItem('email', (error, result) => {
             if (result) {
                 this.setState({
@@ -63,12 +46,12 @@ class DrawerDashboard extends Component {
             }
         });
     }
-    logout  () {
+    logout = async  () =>{
         console.log('masuk')
-        this.props.dispatch(logout(Number(this.state.id),this.state.token))
+        await this.props.dispatch(logout(Number(this.state.id),this.state.token))
         .then(() => {
           AsyncStorage.clear().then(()=>{
-            this.props.navigation.push('home');
+            this.props.navigation.navigate('home');
           })         
         })
     }

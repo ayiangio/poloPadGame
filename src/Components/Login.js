@@ -28,9 +28,9 @@ class Login extends Component {
             await this.props.dispatch(login(this.state.user[0]))
             .then((res)=>{
                 const name = res.action.payload.data.result.fullName
-                this.props.navigation.push('home',{
-                    name: name
-                });
+                this.props.navigation.navigate('home',{
+                    onGoBack: () => this.refresh(),
+                  });
             })
             
     };
