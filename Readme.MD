@@ -34,4 +34,14 @@ $ react-native start
 You can download APK on [here](https://drive.google.com/file/d/1KLyEPfRRMynQo2PArbUXc3BLp_8RAOpP/view?usp=sharing
 )
 
+
+<h3 align="center">Author</h3>
+
+<p align="center">
+<a href="https://github.com/ayiangio">
+  <img alt="Author Andre Feri" title="git author" src="https://avatars3.githubusercontent.com/u/15377357?s=460&v=4" width="250" />
+</a>
+<p align="center"><b><a href="https://github.com/andreferi3">Ayi Angio</a></b></p>
+</p>
+
 &copy; [AyiAngio](https://github.com/ayiangio)  of 2019
