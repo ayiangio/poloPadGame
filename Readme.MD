@@ -1,6 +1,6 @@
 <h1 align="center">Polopad Drum Game</h1>
 <p align="center">
-  <img width="250" src="./src/img/logo.jpg"/>
+  <img width="170" height ='170' src="https://3.bp.blogspot.com/-t3gOG47v29M/VZagp-J7OMI/AAAAAAAAVTo/UgEFBwHanpI/s1600/Polopalo.gif"/>
 </p>
 <p align="center">
   Built with React Native.
