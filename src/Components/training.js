@@ -13,11 +13,11 @@ class Drum extends Component {
         const requireAudio = require('../Assets/snare.wav');
         const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release(), s.setVolume(1.0)); });        
     }
-    onCymbalPress2 = async () => {       
+    onCymbalPress2 = async () => {
         const requireAudio = require('../Assets/cymbal.wav');
         const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release(), s.setVolume(1.0)); });        
     }
-    onCymbalPress1 = async () => {        
+    onCymbalPress1 = async () => {
         const requireAudio = require('../Assets/cymbal.wav');
         const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release(), s.setVolume(1.0)); });        
     }

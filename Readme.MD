@@ -1,47 +1,72 @@
-# <center> Polopad Game Using React Native</center>
-
-<p align='center'>
-  <a href='https://facebook.github.io/react-native/'>
-  <img height='330' width='500' src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png' />
-  </a>
+<h1 align="center">Hit Hit Baam Game</h1>
+<p align="center">
+  <img width="250" src="./src/img/logo.jpg"/>
 </p>
+<p align="center">
+  Built with React Native.
+</p>
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Usage](#usage-for-development)
+- [Screenshots](#screenshots)
+- [Release APK](#release-apk)
+- [Related Project](#related-project-backend)
+- [Contributors](#contributors)
 
 ## Introduction
-[![React Native](https://img.shields.io/badge/React%20Native-0.60-blue)](https://facebook.github.io/react-native/)
-[![Node.js](https://img.shields.io/badge/Node.js-v.10.16-green.svg?style=rounded-square)](https://nodejs.org/)
+<b>Polo Pad</b> is a game where you have to press the drums in accordance with a predetermined pattern if after 3 seconds are passed then you will lose
 
-Aplikasi ini dibangun menggunakan [React Native](https://facebook.github.io/react-native/) untuk Frontend serta menggunakan [NodeJs](https://nodejs.org/en/download/) sebagai Backend.
-
-Aplikasi Mobile untuk perpustakaan (user side) yang berguna untuk melihat status buku, meminjam buku, serta dapat mendonasikan buku  
-
-## Prerequiste
-
-- Node.js - Download and install [Node.js](https://nodejs.org/en/)
-- Java Jdk 8 or Newer - Download and install [Java](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- Android Studio - Download and install [Android Studio](https://developer.android.com/studio/install)
-- React Native - Download and install [React Native](https://facebook.github.io/react-native/)
+## Features
+* Users must sign in before play a game
+* Users can see leaderboard list player
+* Users can play game and get best score
+* User can traning if bored play the game
+* user can register for save the score into leaderboard
 
 
-## Installation
+## Requirements
+* [`npm`](https://www.npmjs.com/get-npm)
+* [`react-native`](https://facebook.github.io/react-native/docs/getting-started)
+* [`react-native-cli`](https://facebook.github.io/react-native/docs/getting-started)
+* [`backEndPolopadGame`](https://github.com/ayiangio/backEndPolopadGame.git)
 
-```
-$ git clone https://github.com/ayiangio/poloPadGame
-$ cd poloPadGame
-$ npm install
-$ react-native run-android
-$ react-native start
-```
-You can download APK on [here](https://drive.google.com/file/d/1KLyEPfRRMynQo2PArbUXc3BLp_8RAOpP/view?usp=sharing
-)
+## Usage for development
+1. Open your terminal or command prompt
+2. Type `git clone https://github.com/ayiangio/poloPadGame.git`
+3. Open the folder and type `npm install` for install dependencies and `react-native link`
+4. Before run this, you must run backend first
+5. Type `react-native run-android` for run this app. ***Make sure your device is connected with debugging mode***.
 
+## Screenshots
+<div align="center">
+    <img width="250" src="./src/img/3.jpeg">    
+    <img width="250" src="./src/img/4.jpeg">
+    <img width="250" src="./src/img/5.jpeg">
+    <img width="250" src="./src/img/6.jpeg">
+</div>
 
-<h3 align="center">Author</h3>
-
-<p align="center">
-<a href="https://github.com/ayiangio">
-  <img alt="Author Andre Feri" title="git author" src="https://avatars3.githubusercontent.com/u/15377357?s=460&v=4" width="250" />
+## Release APK
+<a href="https://drive.google.com/file/d/1KLyEPfRRMynQo2PArbUXc3BLp_8RAOpP/view?usp=sharing">
+  <img src="https://img.shields.io/badge/Download%20on%20the-Google%20Drive-blue.svg?style=popout&logo=google-drive"/>
 </a>
-<p align="center"><b><a href="https://github.com/andreferi3">Ayi Angio</a></b></p>
-</p>
 
-&copy; [AyiAngio](https://github.com/ayiangio)  of 2019
+## Related Project (Backend)
+* [`backEndPolopadGame`](https://github.com/ayiangio/backEndPolopadGame)
+
+## Contributors
+<center>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/ayiangio">
+          <img width="100" src="https://avatars3.githubusercontent.com/u/15377357?s=460&v=4" alt="Falih Naufal"><br/>
+          <sub><b>Ayi Angio</b></sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+</center>
